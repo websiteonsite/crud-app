@@ -1,0 +1,25 @@
+# Node.js with Grunt
+- task: Npm@1
+  inputs:
+    command: 'install'
+    workingDir: 'C:\Users\HP\Desktop\simple-CRUD-app-nodejs-SQLite-master\simple-CRUD-app-nodejs-SQLite-master\package.json'
+# Build a Node.js project using the Grunt task runner.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install
+    grunt --gruntfile Gruntfile.js
+  displayName: 'npm install and run grunt'
